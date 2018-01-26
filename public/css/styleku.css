@@ -1,0 +1,84 @@
+
+.adminp-form .form-group{
+    position: relative;
+    padding: 20px;
+}
+
+.kotak{
+     padding: 20px;
+}
+
+.form-control + .glyphicon {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  padding: 18px 27px;
+}
+
+.adminp-form .input-submit{
+    outline: none;
+    background: #A0BBF7;
+    font-size: 16px;
+    color: #fff;
+    padding: 13px 0;
+    width: 30%;
+    border: none;
+    margin-top: 10px;
+
+}
+.icon-wlabel{
+    margin-top: 10px;
+}
+
+.adminp-form input[type="text"], .adminp-form input[type="date"],.adminp-form input[type="datetime-local"],.adminp-form select{
+    width: 100% !important;
+    color: #9F9F9F;
+    font-size: 14px;
+    padding: 7px 23px 7px 45px;
+    outline: none;
+    border: none;
+    -webkit-appearance: none;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -o-border-radius: 0px;
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Comfortaa', cursive;
+    margin-bottom: -40px;
+    height: 50px;
+}
+
+.table-mairlist .admin-action{
+    margin-top: 10px;
+}
+
+.admin-action{
+    padding: 7px 17px;
+    color: white;
+    margin-left: 4px;
+    border:none;
+}
+a.admin-action:hover{
+    color: white;
+}
+
+.admin-delete{
+    background-color: #D73925;
+}
+.admin-edit{
+    background-color: #F39C12;
+
+}
+
+.banner1{
+    min-height: 170px;
+}
+.header-top .label-banner{
+   
+    font-size: 50px;
+    color: white;
+    float: left;
+    margin-top: 15px;
+}
