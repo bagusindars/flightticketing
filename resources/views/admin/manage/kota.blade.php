@@ -26,7 +26,7 @@
 							<tr>
 								<th style="width: 20px">No</th>
 								<th>Nama</th>
-								<th>ISO</th>
+								<th>Jumlah bandara</th>
 								<th>Dibuat Pada</th>
 								<th style="text-align: center;">Action</th>
 							</tr>
@@ -34,7 +34,15 @@
 								<tr>
 									<td>{{$count++}}</td>
 									<td>{{$kota->nama}}</td>
-									<td>{{$kota->iso}}</td>
+									<td>
+										@php
+											$jum = count($kota->bandara);
+											if( $jum >= 1 )
+												echo  $jum;
+											else
+												echo 0;
+										@endphp
+									</td>
 									<td>{{$kota->created_at->format('d M Y')}}</td>
 
 									<td class=""  style="display: flex;justify-content: center;">

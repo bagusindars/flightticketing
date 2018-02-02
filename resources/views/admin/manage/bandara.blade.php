@@ -26,6 +26,7 @@
 							<tr>
 								<th style="width: 20px">No</th>
 								<th>Nama</th>
+								<th>ISO</th>
 								<th>Kota</th>
 								<th>Daftarkan Pada</th>
 								<th style="text-align: center;">Action</th>
@@ -34,7 +35,8 @@
 								<tr>
 									<td>{{$count++}}</td>
 									<td>{{$bandara->nama_bandara}}</td>
-									<td>{{$bandara->kota->nama}}</td>
+									<td>{{$bandara->iso}}</td>
+									<td>{{$bandara->kotas['nama']}}</td>
 									<td>{{$bandara->created_at->format('d M Y')}}</td>
 
 									<td class=""  style="display: flex;justify-content: center;">

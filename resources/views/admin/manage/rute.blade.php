@@ -38,8 +38,12 @@
 									<td>{{$count++}}</td>
 									<td>{{date('d M Y. H.i', strtotime($rute->depart_at))}}</td>
 									<td>{{date('d M Y. H.i', strtotime($rute->arrive_at))}}</td>
-									<td>{{$rute->rute_from}}</td>
-									<td>{{$rute->rute_to}}</td>
+									<td>{{$rute->from->nama}},<br>
+										{{$rute->band1->nama_bandara}} ({{$rute->band1->iso}})
+									</td>
+									<td>{{$rute->to->nama}},<br>
+										{{$rute->band2->nama_bandara}} ({{$rute->band2->iso}})
+									</td>		
 									<td>{{$rute->plane->name}}</td>
 									<td>{{$rute->harga}}</td>
 									<td>

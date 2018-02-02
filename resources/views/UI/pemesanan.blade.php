@@ -39,10 +39,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                  <!-- <p class="label-banner">Jadwal dan Pencarian</p> -->
                 <div class="top-nav">
                     <div class="hero fa-navicon fa-2x nav_slide_button" id="hero">
-                        <a href="#"><img src="images/menu.png" alt=""></a>
+                        <a href="#"><img src="{{asset('images/menu.png')}}" alt=""></a>
                     </div>  
                 </div>  
                 <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="box-reservasi">
+                <h3>Penerbangan dari {{$rute->from->nama}} ke {{$rute->to->nama}}</h3>
+                <h4>{{date('D , d M Y ' , strtotime($rute->depart_at))}}</h4>
+                <div class="data">
+                    <p>
+                        {{$rute->from->nama}} ({{$rute->band1->iso}})
+                        <img src="{{asset('images/plane.png')}}" alt="">
+                        {{$rute->to->nama}} ({{$rute->band2->iso}})
+                        <span style="padding-left: 10px;margin-left: 10px;border-left: 1px solid #dadada">{{$_GET['penumpang']}} Penumpang</span>
+                    </p>
+
+                </div>
             </div>
         </div>
     </div>
@@ -52,130 +67,70 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 @section('content')
 <div class="container">
-    <div class="isi">
-        <div class="data" style="border-bottom: 1px solid #ddd;padding-bottom: 2px">
-            <div class="data-pencarian">
-                <h3 style="margin-top: 40px;">
-                    @php
-                        $count = 0;
-                    @endphp
-                    @if(empty($_GET))
-                         @foreach($rute as $rutes)
-                            {{$rutes->from->nama}} (Semua Bandara}) →
-                            {{$rutes->to->nama}} (Semua Bandara})
-                            @php
-                                $count++;
-                                if($count >= 1 ) break;
-                            @endphp
-                        @endforeach
-                    @else
-                        @foreach($rute as $rutes)
-                            {{$rutes->from->nama}} (Semua Bandara) →                  
-                            {{$rutes->to->nama}} (Semua Bandara)
-                            @php
-                                $count++;
-                                if($count >= 1 ) break;
-                            @endphp
-                        @endforeach
-                    @endif
-                </h3>
-                <h4>
-                    @if(empty($_GET))
-                        {{ date('D, d M Y ') }}
-                        <span  class="penumpang">
-                            1
-                        </span>
-                    @else
-                        {{date('D, d M Y ' , strtotime($_GET['depart_at']))}}
-                        <span class="penumpang">
-                            {{$_GET['penumpang']}}
-                        </span>
-                    @endif
-                 
-                </h4>
-            </div>
-            <span class="search-more">Ganti Pencarian</span>
-             <div class="clear"></div>
-        </div>
-
-        <div class="form-search-tiket">
-            <form action="{{request()->root()}}/jadwal" method="get">
-                <div class="row">
-                        <div class="col-md-3">
-                            <div class="book_date">
-                                    <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-                                    <select style="text-indent: 42px;width: 100%" name="rute_from" id="">
-                                            <option value="" disabled selected>Dari</option>
-                                        @foreach($kota as $kotas)
-                                            @if(!empty($_GET['rute_from']))
-                                            <option value="{{$kotas->id}}" {{ ($_GET['rute_from'] == $kotas->id) ? "selected" : "" }}>{{$kotas->nama}}</option>      
-                                            @else
-                                            <option value="{{$kotas->id}}" {{$kotas->nama == 'Kroya' ? 'selected' : ''}}>{{$kotas->nama}}</option> 
-                                            @endif   
-                                        @endforeach
-                                    </select>   
-                            </div>
-                        </div>
-                
-                        <div class="col-md-3">
-                            <div class="book_date">
-                                <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-                                <select style="text-indent: 42px;width: 100%" name="rute_to" id="">
-                                        <option value="" disabled selected>Tujuan</option>
-                                    @foreach($kota as $kotas)
-                                        @if(!empty($_GET['rute_to']))
-                                        <option value="{{$kotas->id}}" {{ $_GET['rute_to'] == $kotas->id? "selected" : "" }}>{{$kotas->nama}}</option> 
-                                        @else
-                                        <option value="{{$kotas->id}}" {{$kotas->nama == 'Bandung' ? 'selected' : ''}}>{{$kotas->nama}}</option>        
-                                        @endif
-                                    @endforeach
-                                </select> 
-                            </div>           
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="book_date">               
-                                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                                @if(!empty($_GET['depart_at']))
-                                <input class="date datepicker" name="depart_at" id="datepicker" type="date" value="{{$_GET['depart_at']}}" >
-                                @else
-                                <input class="date datepicker" name="depart_at" id="datepicker" type="date" value="{{date('Y-m-d')}}" >
-                                @endif
-                            </div> 
-                        </div>                            
-                        <div class="col-md-3">
-                            <div class="book-date">
-                              <span class="glyphicon glyphicon-map-marker" aria-hidden="true" style="visibility: hidden;"></span>
-                              <select name="penumpang" class="" style="text-indent: 10px;width: 100%">
-                                    <option value="" selected disabled>Penumpang</option>
-                                    @for($i = 1 ; $i <= 7;$i++)
-                                        @if(!empty($_GET['penumpang']))
-                                        <option value="{{$i}}" {{ $_GET['penumpang'] == $i? "selected" : "" }}>{{$i}}</option>
-                                        @else
-                                        <option value="{{$i}}" {{ $i == 1 ? 'selected' :'' }}>{{$i}}</option>
-                                        @endif
-                                    @endfor
-                              </select>
-                            </div>
-                        </div> 
-                       <div class="container">
-                        <input type="submit" class="submit-form-jadwal" name="search" value="Search Flights" />
-                        </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="box-reservasi box-reservasi2">
+                <div class="data">
+                    <p>
+                        {{$rute->from->nama}} ({{$rute->band1->iso}})
+                        <img src="{{asset('images/plane.png')}}" alt="">
+                        {{$rute->to->nama}} ({{$rute->band2->iso}})
+                    </p>
+                    <h5>
+                        {{date('D , d M Y',strtotime($rute->depart_at))}}
+                    </h5>
                 </div>
-            </form>
+                <div class="container">
+                    <div class="plane">
+                        <div class="row">
+                            <h3>{{$rute->plane->name}} {{$rute->plane->code}}</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                         @php
+                            $start = new DateTime($rute->depart_at);
+                            $end   = new DateTime($rute->arrive_at);
+                            $diff  = $start->diff($end);
+
+                        @endphp
+                        <div class="jam">
+                            <div class="col-md-2">
+                                {{date('H:i',strtotime($rute->depart_at))}} <br>
+                                {{$rute->band1->nama_bandara}} 
+                            </div>
+                            <div class="col-md-2">
+                                {{date('H:i',strtotime($rute->arrive_at))}} <br>
+                                {{$rute->band2->nama_bandara}} 
+                            </div>
+                            <div class="col-md-2">
+                                {{$diff->h}}j <span>{{$diff->i}}m
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="col-md-4">
+            <div class="box-reservasi box-reservasi2">
+                <div class="data">
+                    <p>Summary</p>
+                </div>
+                <p>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="isi">
         
+      
         @php
             $count = 1;
         @endphp
-       <div class="box" >
+       <div class="box" style="margin-top: 50px">
                 <div class="box-body">
-                     @if($rute->count() == 0 )
-                        <div class="blank-record">
-                            <h3 >Tidak ada jadwal penerbangan</h3>
-                        </div>
-                    @else 
-                    
                     <table class="table">
                         <tbody>
                             <tr class="tr-h">
@@ -188,7 +143,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <th>Harga per orang</th>
                                 
                             </tr>
-                            @foreach($rute as $rute)
+                           
                                 <tr class="tr-isi">
                                     <td style="border-left:1px solid #1BA0E2">{{$rute->plane->name}}</td>
                                     <td>{{date('H.i', strtotime($rute->depart_at))}}</td>
@@ -202,27 +157,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                         @endphp
                                         <p>{{$diff->h}}j <span>{{$diff->i}}m</span></p>
                                     </td>
-                                    <td>{{$rute->from->nama}},<br>{{$rute->band1->nama_bandara}} ({{$rute->band1->iso}})</td>
-                                    <td>{{$rute->to->nama}},<br>{{$rute->band2->nama_bandara}} ({{$rute->band2->iso}})</td>
+                                    <td>{{$rute->from->nama}} ({{$rute->from->iso}}),<br>{{$rute->band1->nama_bandara}}</td>
+                                    <td>{{$rute->to->nama}} ({{$rute->to->iso}}),<br>{{$rute->band2->nama_bandara}}</td>
                                     <td style="border-right:1px solid #1BA0E2">
                                         <p class="harga">{{number_format($rute->harga,2)}}</p>
-                                        @if(!empty($_GET['penumpang']))
-                                        <a href="/pemesanan/{{$rute->id}}?penumpang={{ $_GET['penumpang']   }}" class="choose">Pilih</a> <br><br>
-                                        @else
-                                        <a href="/pemesanan/{{$rute->id}}?penumpang=1" class="choose">Pilih</a> <br><br>
-                                        @endif
+                                        <a href="/pemesanan/{{$rute->id}}" class="choose">Pilih</a> <br><br>
                                         <p>*Sisa {{$rute->kursi}} kursi</p>
                                     </td>
                                     
                                 </tr>
 
-                            @endforeach
+           
                         </tbody>
                     </table>
-                    @endif
                 </div>
             </div>
-           
+            @if($rute->count() == 0 )
+                <div class="blank-record">
+                    <h3 style="text-align: center;padding: 20px">Tidak ada jadwal penerbangan</h3>
+                </div> 
+            @endif
     </div><!-- ISI -->
 </div><!-- CONTAINER -->
 

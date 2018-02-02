@@ -75,8 +75,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 																<div class="form-group  has-feedback">
 												        		<select required style="text-indent: 42px;width: 100%" name="rute_from" id="">
 																		<option value="" disabled selected>Dari</option>
-																	@foreach($rutefrom as $rutes)
-																		<option value="{{$rutes->rute_from}}">{{$rutes->rute_from}}</option>		
+																	@foreach($kota as $kotas)
+																		<option value="{{$kotas->id}}">{{$kotas->nama}}</option>		
 																	@endforeach
 																</select>
 												        		
@@ -88,8 +88,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 																<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
 																<select required style="text-indent: 42px;width: 100%" name="rute_to" id="">
 																		<option value="" disabled selected>Tujuan</option>
-																	@foreach($ruteto as $rutes)
-																		<option value="{{$rutes->rute_to}}">{{$rutes->rute_to}}</option>		
+																	@foreach($kota as $kotas)
+																		<option value="{{$kotas->id}}">{{$kotas->nama}}</option>		
 																	@endforeach
 																</select>
 												        		
@@ -124,16 +124,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 											<div class="reservation">
 												<ul>
 													<li class="span1_of_1 adult">
-														 <h5>Traveller</h5>
+														 <h5>Penumpang</h5>
 													
 														 <div class="section_room">
-															  <select id="1 Traveller" onchange="change_country(this.value)" class="frm-field required sect1">
-																	<option value="null">1 Traveller</option>
-																	<option value="null">2 Traveller</option>         
-																	<option value="AX">3 Traveller</option>
-																	<option value="AX">4 Traveller</option>
-																	<option value="AX">5 Traveller</option>
-																	<option value="AX">6 Traveller</option>
+															  <select id="1 Traveller" name="penumpang" onchange="change_country(this.value)" class="frm-field required sect1">
+															  		@for($i = 1 ; $i <= 7;$i++)
+																	<option value="{{$i}}">{{$i}}</option>
+																	@endfor
 															  </select>
 														 </div>	
 													</li>

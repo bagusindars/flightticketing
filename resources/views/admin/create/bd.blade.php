@@ -23,6 +23,12 @@
 		        		<input type="text" class="form-control" required name="nama" placeholder="Nama Bandara">
 		        		<i class="glyphicon glyphicon glyphicon-map-marker form-control-feedback"></i>
 					</div>
+
+					<div class="form-group  has-feedback">
+		        		<input type="text" class="form-control" required name="iso" placeholder="Nama IATA. ex CGK">
+		        		<i class="glyphicon glyphicon glyphicon-map-marker form-control-feedback"></i>
+					</div>
+
 					<div class="form-group">
 						<select name="kota" id="">
 							<option value="" disabled selected>Kota</option>

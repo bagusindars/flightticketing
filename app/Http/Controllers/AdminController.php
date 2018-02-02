@@ -70,14 +70,31 @@ class AdminController extends Controller
 
    public function createrute(){
         $planes = Transportation::all();
-        return view('admin.create.rt',compact('planes'));
+        $kotas = Kota::with('bandara')->get();
+        $bandaras = Bandara::get();
+
+        return view('admin.create.rt',compact('planes','kotas','bandaras'));
     }
+    public function getBandara1($id) {
+        $bandaras = Bandara::where("kota_id",$id)->pluck("id","nama_bandara","iso");
+        return json_encode($bandaras);
+    }
+    public function getBandara2($id) {
+        $bandaras = Bandara::where("kota_id",$id)->pluck("id","nama_bandara","iso");
+        return json_encode($bandaras);
+    }
+    public function getKursi($id) {
+        $kursi = Transportation::where("id",$id)->pluck("seat_qty","name");
+        return json_encode($kursi);
+    }
+
 
     public function viewallRute(){
 
-        $rutes  = Rute::with('plane')->get();
+        $rutes  = Rute::with('plane')->orderBy('depart_at')->get();
         return view('admin.manage.rute',compact('rutes'));
     }
+
 
     public function storerute(Request $request){
 
@@ -85,8 +102,11 @@ class AdminController extends Controller
             'depart_at' => $request->depart_at,
             'arrive_at' => $request->arrive_at,
             'rute_from' => $request->rute_from,
+            'bandara1' => $request->bandara1,
             'rute_to' => $request->rute_to,
+            'bandara2' => $request->bandara2,
             'harga' => $request->price,
+            'kursi' => $request->kursi,
             'transport_id' => $request->plane,
         ]);
 
@@ -96,8 +116,9 @@ class AdminController extends Controller
 
     public function editrute($id){
         $rute = Rute::findOrFail($id);
+        $kotas = Kota::with('bandara')->get();
         $plane = Transportation::all();
-        return view('admin.manage.rute_u',compact('rute','plane'));
+        return view('admin.manage.rute_u',compact('rute','plane','kotas'));
     }
 
     public function showrute(Request $request,$id){
@@ -109,8 +130,11 @@ class AdminController extends Controller
             'depart_at' => $request->depart_at,
             'arrive_at' => $tgltiba,
             'rute_from' => $request->rute_from,
+            'bandara1' => $request->bandara1,
             'rute_to' => $request->rute_to,
+            'bandara2' => $request->bandara2,
             'harga' => $request->harga,
+            'kursi' => $request->kursi,
             'transport_id' => $request->plane,
         ]);
 
@@ -128,7 +152,7 @@ class AdminController extends Controller
 
 
 
-   // ========================================================================================== USER
+   // ========================================================================================= USER
    public function viewallUser(){
         $users = User::get();
         return view('admin.manage.user',compact('users'));
@@ -154,19 +178,21 @@ class AdminController extends Controller
 
     public function viewallKota(){
 
-        $kotas  = Kota::get();
+        $kotas  = Kota::with('bandara')->orderBy('nama')->get();
         return view('admin.manage.kota',compact('kotas'));
     }
 
     public function storekota(Request $request){
 
-        Kota::create([
-            'nama' => $request->nama,
-            'iso' => $request->iso,
-        ]);
-
-        return redirect()->back()->with('berhasil','Berhasil mendaftarkan kota');
-
+        
+        if(Kota::where('nama',$request->nama)->exists()){
+            return redirect()->back()->with('gagal','Kota sudah terdaftar');
+        }else{
+            Kota::create([
+                'nama' => $request->nama,
+            ]);
+            return redirect()->back()->with('berhasil','Berhasil mendaftarkan kota');
+        }
     }
 
     public function editkota($id){
@@ -178,11 +204,10 @@ class AdminController extends Controller
     public function showkota(Request $request,$id){
 
         $kota = Kota::find($id);
+    
 
         $kota->update([
             'nama' => $request->nama,
-            'iso' => $request->iso,
-            
         ]);
 
         $kota->save();
@@ -199,7 +224,7 @@ class AdminController extends Controller
 
 
 
-   // ================================================================================== BANDARA
+   // ========================================================================================== BANDARA
     public function createbandara(){
         $kotas = Kota::get();
         return view('admin.create.bd',compact('kotas'));
@@ -207,7 +232,7 @@ class AdminController extends Controller
 
     public function viewallbandara(){
 
-        $bandaras  = Bandara::with('kota')->get();
+        $bandaras  = Bandara::with('kotas')->orderBy('nama_bandara')->get();
         return view('admin.manage.bandara',compact('bandaras'));
     }
 
@@ -215,6 +240,7 @@ class AdminController extends Controller
 
         Bandara::create([
             'nama_bandara' => $request->nama,
+            'iso' => $request->iso,
             'kota_id' => $request->kota,
         ]);
 
@@ -224,8 +250,8 @@ class AdminController extends Controller
 
     public function editbandara($id){
         $bandara = Bandara::findOrFail($id);
-        
-        return view('admin.manage.bandara_u',compact('bandara'));
+        $kotas = Kota::get();
+        return view('admin.manage.bandara_u',compact('bandara','kotas'));
     }
 
     public function showbandara(Request $request,$id){
@@ -234,7 +260,8 @@ class AdminController extends Controller
 
         $bandara->update([
             'nama_bandara' => $request->nama,
-            'kota_id' => $request->kota_id,
+            'iso' => $request->iso,
+            'kota_id' => $request->kota,
         ]);
 
         $bandara->save();

@@ -12,6 +12,8 @@
 		<div class="form-group">
 			@if(Session::has('berhasil'))
 				<div class="alert alert-success">{{ Session::get('berhasil') }}</div>
+			@elseif(Session::has('gagal'))
+				<div class="alert alert-danger">{{ Session::get('gagal') }}</div>
 			@endif
 
 		</div>
@@ -21,10 +23,6 @@
 	      			
 					<div class="form-group  has-feedback">
 		        		<input type="text" class="form-control" required name="nama" placeholder="Nama kota">
-		        		<i class="glyphicon glyphicon glyphicon-map-marker form-control-feedback"></i>
-					</div>
-					<div class="form-group  has-feedback">
-		        		<input type="text" class="form-control" required name="iso" placeholder="Nama iso. ex JKT">
 		        		<i class="glyphicon glyphicon glyphicon-map-marker form-control-feedback"></i>
 					</div>
 

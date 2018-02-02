@@ -19,7 +19,6 @@ Route::get('/index',function(){
 	return redirect('/');
 });
 Route::get('/jadwal', 'frontcont@jadwal');
-
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
@@ -43,6 +42,9 @@ Route::group(['middleware' => 'auth'],function(){
 
 		Route::get('admin/mrute','AdminController@viewallRute');
 		Route::get('admin/create/rute','AdminController@createrute');
+		Route::get('admin/create/rute/get1/{id}', 'AdminController@getBandara1');
+		Route::get('admin/create/rute/get2/{id}', 'AdminController@getBandara2');
+		Route::get('admin/create/rute/get3/{id}', 'AdminController@getKursi');
 		Route::post('admin/create/rute','AdminController@storerute');
 		Route::get('admin/mrute/{id}/edit','AdminController@editrute');
 		Route::post('admin/mrute/{id}','AdminController@showrute');
@@ -72,4 +74,8 @@ Route::group(['middleware' => 'auth'],function(){
 });
 
 
+Route::get('/pemesanan',function(){
+		return redirect()->back();
+	});
+Route::get('/pemesanan/{id}','frontcont@pemesanan');
 

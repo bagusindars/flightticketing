@@ -61,8 +61,8 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script src="{{ asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
-<script src="{{asset('js/scripts.js?v=1.7')}}"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!-- <script src="{{asset('js/scripts.js?v=1.7')}}"></script> -->
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('bower_components/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -99,5 +99,6 @@
 <!-- AdminLTE for demo purposes -->
 
 <script src="{{ asset('dist/js/demo.js')}}"></script>
+<script src="{{ asset('/js/scripts.js')}}"></script>
 </body>
 </html>

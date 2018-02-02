@@ -17,10 +17,6 @@
 		        		<input type="text" class="form-control" required name="nama" placeholder="Nama kota" value="{{$kota->nama }}">
 		        		<i class="glyphicon glyphicon-qrcode form-control-feedback"></i>
 					</div>
-					<div class="form-group  has-feedback">
-		        		<input type="text" value="{{$kota->iso}}" class="form-control" required name="iso" placeholder="Nama ISO">
-		        		<i class="glyphicon glyphicon-plane form-control-feedback"></i>
-					</div>
 					
 					{{ csrf_field() }}
 					<div class="form-group">

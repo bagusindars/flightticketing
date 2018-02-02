@@ -24,13 +24,40 @@
 		        		<i class="glyphicon glyphicon-calendar form-control-feedback icon-wlabel"></i>
 					</div>
 					<div class="form-group  has-feedback">
-		        		<input type="text" value="{{$rute->rute_from}}" class="form-control" required name="rute_from" placeholder="Dari">
-		        		<i class="glyphicon glyphicon-map-marker form-control-feedback"></i>
+						<label for="rute_from">Dari</label>
+		        		<select name="rute_from" id="rute_from" required>
+								<option value="" disabled selected>Kota</option>
+							@foreach($kotas as $kota)
+						<!-- 		<option value="{{$kota->nama}} ({{$kota->iso}})">{{$kota->nama}} ({{$kota->iso}})</option> -->
+									<option value="{{$kota->id}}">{{$kota->nama}} ({{$kota->iso}})</option>		
+									
+							@endforeach
+						</select>
 					</div>
 					<div class="form-group  has-feedback">
-		        		<input type="text" class="form-control" value="{{$rute->rute_to}}" required name="rute_to" placeholder="Tujuan">
-		        		<i class="glyphicon glyphicon-map-marker form-control-feedback"></i>
+						<label for="bandara1">Bandara</label>
+		        		<select name="bandara1" id="bandara1" required>
+								<option value="" disabled selected>Bandara</option>		
+						</select>
 					</div>
+				
+					<div class="form-group  has-feedback">
+						<label for="rute_to">Tujuan</label>
+		        		<select name="rute_to" id="" required>
+								<option value="" disabled selected>Kota</option>
+							@foreach($kotas as $kota)
+								<option value="{{$kota->id}}">{{$kota->nama}} ({{$kota->iso}})</option>		
+							@endforeach
+						</select>
+					</div>
+					<div class="form-group  has-feedback">
+						<label for="bandara2">Bandara</label>
+		        		<select name="bandara2" id="bandara2" required>
+								<option value="" disabled selected>Bandara</option>
+							
+						</select>
+					</div>
+
 					<div class="form-group  has-feedback">
 		        		<input type="text" class="form-control" value="{{$rute->harga}}" required name="harga" placeholder="Harga">
 		        		<i class="glyphicon glyphicon-usd form-control-feedback"></i>
@@ -41,6 +68,10 @@
 								<option value="{{$planes->id}}" {{ old('plane') ==  $planes->id ? "selected" : '' }}>{{$planes->name}}</option>		
 							@endforeach
 						</select>
+					</div>
+					<div class="form-group  has-feedback">
+		        		<input type="text" class="form-control" value="{{old('kursi')}}" required name="kursi" placeholder="Jumlah Penumpang" readonly="true">
+		        		<i class="glyphicon glyphicon-user form-control-feedback"></i>
 					</div>
 					{{ csrf_field() }}
 					<div class="form-group">

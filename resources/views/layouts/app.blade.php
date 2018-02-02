@@ -10,12 +10,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
         function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/styles.css?v=1.6" rel="stylesheet">
+
+<link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all" />
+<link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
+<link href="{{asset('css/styles.css?v=1.6')}}" rel="stylesheet">
 <!-- js -->
-<script src="js/jquery-1.11.1.min.js"></script>
-<script src="js/scripts.js?v=1.7"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="{{asset('js/scripts.js')}}"></script>
 <!-- //js -->
 <!--FlexSlider-->
         <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
@@ -32,7 +33,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       </script>
 <!--End-slider-script-->
 <!-- pop-up-script -->
-<script src="js/jquery.chocolat.js"></script>
+<script src="{{asset('js/jquery.chocolat.js')}}"></script>
         <link rel="stylesheet" href="css/chocolat.css" type="text/css" media="screen" charset="utf-8">
         <!--light-box-files -->
         <script type="text/javascript" >
@@ -41,10 +42,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
         </script>
 <!-- //pop-up-script -->
-<script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
+<script src="{{asset('js/easyResponsiveTabs.js')}}" type="text/javascript"></script>
 <!-- start-smoth-scrolling -->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript" src="{{asset('js/move-top.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/easing.js')}}"></script>
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         $(".scroll").click(function(event){     
@@ -53,7 +54,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
     });
 </script>
-<link rel="stylesheet" href="css/jquery-ui.css" />
+<link rel="stylesheet" href="{{asset('css/jquery-ui.css')}}" />
 <script src="js/jquery-ui.js"></script>
  <script>
       $(function() {
@@ -70,6 +71,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     <title>{{ config('app.name', 'Airplane') }}</title>
     <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/styleku.css')}}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>

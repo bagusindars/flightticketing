@@ -1,4 +1,11 @@
+*{
+    font-family: 'Ropa Sans', sans-serif;
+}
 
+
+.clear {
+    clear: both;
+}
 .adminp-form .form-group{
     position: relative;
     padding: 20px;
@@ -54,11 +61,14 @@
     margin-top: 10px;
 }
 
+
 .admin-action{
     padding: 7px 17px;
     color: white;
     margin-left: 4px;
     border:none;
+    width: 100%;
+    text-align: center;
 }
 a.admin-action:hover{
     color: white;
@@ -82,3 +92,152 @@ a.admin-action:hover{
     float: left;
     margin-top: 15px;
 }
+
+.banner1{
+    background-image: url(../images/back.jpg);
+
+}
+.isi{
+    margin-bottom: 70px;
+}
+
+.table{
+      border-collapse:separate; 
+  border-spacing: 0 2em;
+
+}
+
+.table .tr-h th{
+    height: 60px;
+   padding-top: 20px;
+   text-align: center;
+
+}
+
+
+.table .tr-isi td{
+   height: 130px;
+   padding-top: 30px;
+   text-align: center;
+    border-bottom: 1px solid #1BA0E2;
+    border-top: 1px solid #1BA0E2;
+}
+
+.table tr:hover{
+    border-bottom: 1px solid #1BA0E2;
+}
+.harga{
+    color:#FA6D01;
+}
+.harga:before{
+    content: 'Rp.';
+}
+.harga:after{
+    content: '.-';
+}
+
+.choose{
+    background-color: #F96D01;
+    padding: 10px 40px;
+    color: white;
+    font-weight: bold;
+   
+}
+.choose:hover{
+    color: white;
+    background-color: #FB8B34;
+}
+
+.penumpang{
+    margin-left: 10px;
+    border-left: 1px solid #dedede;
+    padding-left: 12px;
+}
+
+.penumpang:after{
+    content: "Penumpang";
+    display: inline;
+}
+.data-pencarian{
+    float: left;
+}
+.search-more{
+    float: right;
+    margin-top: 50px;
+    padding: 7px 40px;
+    background-color: #0770CD;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.search-more:hover{
+    color: white;
+}
+
+.form-search-tiket .book_date span{
+    top: 3.2em;
+}
+.form-search-tiket select{
+    padding: 20px;
+    background-color: transparent;
+    border: 1px solid #DADADA;
+}
+.form-search-tiket option{
+    padding: 20px;
+}
+
+.form-search-tiket  .book_date input[type="date"]{
+    background-color: transparent;
+    border-radius: 0;
+    height: 100%;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.submit-form-jadwal{
+    padding: 5px 40px;
+    margin-top: 20px;
+    background-color: #F96D01;
+      color: white;
+    font-size: 17px;
+    cursor: pointer;
+    font-weight: bold;
+    border:none;
+    outline: none;
+}
+
+.blank-record{
+    text-align: center;
+    padding: 100px;
+    border:1px solid #dadada;
+    margin-top: 20px;
+}
+
+ .box-reservasi{
+    margin-top: 20px;
+    background-color: white;
+    padding: 1px 0px 20px 20px;
+    margin-bottom: 6px;
+}
+.box-reservasi .data{
+    margin-top: 20px;
+    font-size: 20px;
+}
+ .box-reservasi img{
+    width: 23px;
+    margin-left: 10px;
+    margin-right: 10px;
+ }
+
+ .container .box-reservasi2 .data p:after{
+    content: "";
+    display: block;
+    height: 1px;
+    width: 96%;
+    background-color: #dadada;
+ }
+  .container .box-reservasi2 .data h5{
+    font-weight: bold;
+  }
