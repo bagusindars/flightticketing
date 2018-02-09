@@ -124,12 +124,45 @@ $(window).on('load',function() {
     })
 
 
+	 var imagesPreview = function(input, placeToInsertImagePreview) {
+
+	        if (input.files) {
+	            var filesAmount = input.files.length;
+
+	            for (i = 0; i < filesAmount; i++) {
+	                var reader = new FileReader();
+
+	                reader.onload = function(event) {
+	                    $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+	                }
+
+	                reader.readAsDataURL(input.files[i]);
+	            }
+	        }
+
+	    };
+
+	    $('#logo-input-file').on('change', function() {
+	        imagesPreview(this, 'div.imgPreview');
+	    });
+
+	     $('#bukti-input-file').on('change', function() {
+	        imagesPreview(this, 'div.imgPreview');
+	    });
 
 
+	    $('.panah-bawah-reservasi').on('click',function(){
+	    	$('.datapesan').stop().toggle(250);
+	    })
+
+	    $('.openseat').on('click',function(){
+	    	$('.seat-see').stop().toggle(50);
+	    	$(this).text(function(i,text){
+	    		return text === "Sembunyikan" ? "Lihat Kursi" : "Sembunyikan";
+	    	});
+	    })
 
 
-
-
+	    
 
 });
-

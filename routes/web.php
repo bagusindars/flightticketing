@@ -69,6 +69,10 @@ Route::group(['middleware' => 'auth'],function(){
 		Route::delete('admin/muser/{id}','AdminController@deleteuser');
 
 
+		Route::get('admin/transaksi','AdminController@konfirmasitrx');
+		Route::get('admin/transaksi/{id}/edit','AdminController@konfirmtrx');
+		Route::delete('admin/transaksi/{id}','AdminController@deletetrx');
+
 	});
 
 });
@@ -78,4 +82,17 @@ Route::get('/pemesanan',function(){
 		return redirect()->back();
 	});
 Route::get('/pemesanan/{id}','frontcont@pemesanan');
+Route::get('/pemesanan/{id}/detail/','frontcont@pemesananreg');
+
+Route::post('/pemesanan/{id}/detail2/','frontcont@inputcustomer');
+Route::get('/pemesanan/{id}/detailstp2/','frontcont@cekcustomer');
+Route::post('/pemesanan/{id}/detail3/','frontcont@pilihkursi');
+Route::get('/pemesanan/{id}/detailstp3/','frontcont@konfirmasi');
+Route::get('/pemesanan/{id}/pembayaran/','frontcont@pembayaran');
+
+Route::post('/pemesanan/{id}/pembayaran/','frontcont@konfirmasipembayaraninput');
+Route::get('/konfirmasi','frontcont@konfirmasipembayaran');
+Route::post('/konfirmasi','frontcont@inputtransaksi');
+
+
 

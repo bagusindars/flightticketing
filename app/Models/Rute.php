@@ -38,7 +38,9 @@ class Rute extends Model
         return $this->belongsTo('App\Models\Bandara','bandara2');
     }
 
-
+    public function pemesans(){
+        return $this->belongsToMany('App\Models\Pemesan');
+    }
   
    
 }

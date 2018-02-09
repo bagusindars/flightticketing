@@ -12,7 +12,12 @@
 		
   		<div class="row">
 	      	<div class="adminp-form">
-	      		<form action="{{request()->root()}}/admin/mairlist/{{$plane->id}}/" method="post">
+	      		<form action="{{request()->root()}}/admin/mairlist/{{$plane->id}}/" method="post" enctype="multipart/form-data">
+	      			<div class="form-group  has-feedback">
+						<input type="file" class="form-control" name="logo" id="logo-input-file">
+						<p style="margin-top: 5px">*Kosongkan jika tidak ada perubahan pada gambar</p>
+						<div class="imgPreview"></div>
+	      			</div>	
 	      			<div class="form-group  has-feedback">
 		        		<input type="text" class="form-control" required name="code" placeholder="Kode Pesawat" value="{{$plane->code }}">
 		        		<i class="glyphicon glyphicon-qrcode form-control-feedback"></i>

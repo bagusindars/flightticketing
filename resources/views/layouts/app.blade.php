@@ -75,7 +75,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link rel="stylesheet" href="{{asset('css/styleku.css')}}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: #E6EAEC;">
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0;padding: 12px">
             <div class="container">

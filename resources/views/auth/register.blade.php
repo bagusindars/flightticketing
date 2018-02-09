@@ -78,7 +78,38 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group{{ $errors->has('alamat') ? ' has-error' : '' }}">
+                               
+                                <div>
+                                    <input id="alamat" placeholder="Alamat" type="text" name="alamat" value="{{ old('alamat') }}" required>
 
+                                    @if ($errors->has('alamat'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('alamat') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                               
+                                <div>
+                                    <input id="phone" placeholder="No. Hp (+628572837)" type="text" name="phone" value="{{ old('phone') }}" required>
+
+                                    @if ($errors->has('phone'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('phone') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                    
+                        <div class="form-group">
+                            <select name="gender" id="">
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
 
                         <h4 class="kij">Login Information</h4><br>
 

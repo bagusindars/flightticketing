@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Transportation extends Model
 {
     protected $fillable = [
-        'code', 'name', 'description','seat_qty',
+        'logo','code', 'name', 'description','seat_qty',
     ];
 
 

@@ -70,7 +70,7 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-bookmark-o"></i>Reservation</a></li>
+        <li><a href="admin/transaksi"><i class="fa fa-bookmark-o"></i>Transaksi</a></li>
       </ul>
     </li>
   </ul>

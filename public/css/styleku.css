@@ -43,7 +43,6 @@
     font-size: 14px;
     padding: 7px 23px 7px 45px;
     outline: none;
-    border: none;
     -webkit-appearance: none;
     border-radius: 0px;
     -webkit-border-radius: 0px;
@@ -119,8 +118,8 @@ a.admin-action:hover{
    height: 130px;
    padding-top: 30px;
    text-align: center;
-    border-bottom: 1px solid #1BA0E2;
-    border-top: 1px solid #1BA0E2;
+    background-color: white;
+    font-size: 16px;
 }
 
 .table tr:hover{
@@ -211,7 +210,7 @@ a.admin-action:hover{
 .blank-record{
     text-align: center;
     padding: 100px;
-    border:1px solid #dadada;
+    background-color: white;
     margin-top: 20px;
 }
 
@@ -230,14 +229,81 @@ a.admin-action:hover{
     margin-left: 10px;
     margin-right: 10px;
  }
-
+ .container .box-reservasi2{
+    box-shadow: 0px 0px 15px  #CED2D4;
+}
  .container .box-reservasi2 .data p:after{
     content: "";
     display: block;
     height: 1px;
     width: 96%;
     background-color: #dadada;
+    margin-top: 5px;
  }
-  .container .box-reservasi2 .data h5{
+.container .box-reservasi2 .data h5{
     font-weight: bold;
-  }
+}
+
+.plane-logo-box{
+    width: 100px;
+}
+.plane-logo{
+    width: 100%;
+}
+
+.imgPreview img{
+    width: 100px;
+    margin-top: 20px;
+}
+.plane-logo-pesan{
+    width: 1px;
+
+}
+
+.waktu{
+    font-size: 20px;
+}
+
+.reservasi-nav{
+    background-color: white;
+    box-shadow: 0px 0px 10px #CBCED1;
+}
+.page-reservasi{
+    margin-top: 80px;
+
+}
+
+.page-reservasi .title-header{
+    text-indent: 0px;
+    font-weight: bold;
+}
+
+
+
+.container-2 .kiri .auth{
+    display: block;
+    font-size: 18px;
+
+}
+.container-2 .jumbotron-page-reservasi-1 {
+    font-size: 20px;
+
+}
+.container-2 .kiri .auth a{
+    font-family: 'Ropa Sans', sans-serif;
+}
+
+.jumbotron-page-reservasi{
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 0px 15px #DFE2E5;
+}
+
+
+.pilot,.co-pilot{
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #0770CD;
+    text-align: center;
+}

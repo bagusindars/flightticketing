@@ -17,7 +17,11 @@
 		</div>
   		<div class="row">
 	      	<div class="adminp-form">
-	      		<form action="{{request()->root()}}/admin/create/al" method="post">
+	      		<form action="{{request()->root()}}/admin/create/al" method="post" enctype="multipart/form-data">
+	      			<div class="form-group  has-feedback">
+						<input type="file" class="form-control" name="logo" id="logo-input-file" required>
+						<div class="imgPreview"></div>
+	      			</div>
 	      			<div class="form-group  has-feedback">
 		        		<input type="text" class="form-control" required name="code" placeholder="Kode Pesawat">
 		        		<i class="glyphicon glyphicon-qrcode form-control-feedback"></i>

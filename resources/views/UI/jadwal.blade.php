@@ -110,7 +110,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                             @if(!empty($_GET['rute_from']))
                                             <option value="{{$kotas->id}}" {{ ($_GET['rute_from'] == $kotas->id) ? "selected" : "" }}>{{$kotas->nama}}</option>      
                                             @else
-                                            <option value="{{$kotas->id}}" {{$kotas->nama == 'Kroya' ? 'selected' : ''}}>{{$kotas->nama}}</option> 
+                                            <option value="{{$kotas->id}}" {{$kotas->nama == 'Jakarta' ? 'selected' : ''}}>{{$kotas->nama}}</option> 
                                             @endif   
                                         @endforeach
                                     </select>   
@@ -190,21 +190,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </tr>
                             @foreach($rute as $rute)
                                 <tr class="tr-isi">
-                                    <td style="border-left:1px solid #1BA0E2">{{$rute->plane->name}}</td>
-                                    <td>{{date('H.i', strtotime($rute->depart_at))}}</td>
-                                    <td>{{date('H.i', strtotime($rute->arrive_at))}}</td>
-                                    <td>
+                                    <td>    <br>
+                                        <img style="width: 60px;margin-right: 5px" src="{{asset('img/logo/'.$rute->plane->logo)}}" alt="Logo" >
+                                        {{$rute->plane->name}}
+                                    </td>
+                                    <td><br><div class="waktu">{{date('H:i', strtotime($rute->depart_at))}}</div></td>
+                                    <td><br><div class="waktu">{{date('H:i', strtotime($rute->arrive_at))}}</div></td>
+                                    <td><br>
                                         @php
                                             $start = new DateTime($rute->depart_at);
                                             $end   = new DateTime($rute->arrive_at);
                                             $diff  = $start->diff($end);
 
                                         @endphp
-                                        <p>{{$diff->h}}j <span>{{$diff->i}}m</span></p>
+                                       <div class="waktu"><p>{{$diff->h}}j <span>{{$diff->i}}m</span></p> </div> 
                                     </td>
-                                    <td>{{$rute->from->nama}},<br>{{$rute->band1->nama_bandara}} ({{$rute->band1->iso}})</td>
-                                    <td>{{$rute->to->nama}},<br>{{$rute->band2->nama_bandara}} ({{$rute->band2->iso}})</td>
-                                    <td style="border-right:1px solid #1BA0E2">
+                                    <td><br>{{$rute->from->nama}}<br>{{$rute->band1->nama_bandara}} ({{$rute->band1->iso}})</td>
+                                    <td><br>{{$rute->to->nama}},<br>{{$rute->band2->nama_bandara}} ({{$rute->band2->iso}})</td>
+                                    <td>
                                         <p class="harga">{{number_format($rute->harga,2)}}</p>
                                         @if(!empty($_GET['penumpang']))
                                         <a href="/pemesanan/{{$rute->id}}?penumpang={{ $_GET['penumpang']   }}" class="choose">Pilih</a> <br><br>

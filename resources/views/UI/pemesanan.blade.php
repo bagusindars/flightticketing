@@ -75,15 +75,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         {{$rute->from->nama}} ({{$rute->band1->iso}})
                         <img src="{{asset('images/plane.png')}}" alt="">
                         {{$rute->to->nama}} ({{$rute->band2->iso}})
+                        <span style="margin-left: 10px;padding-left: 10px;border-left: 1px solid #dadada">{{$rute->plane->name}} {{$rute->plane->code}}</span>
                     </p>
                     <h5>
                         {{date('D , d M Y',strtotime($rute->depart_at))}}
                     </h5>
                 </div>
                 <div class="container">
-                    <div class="plane">
-                        <div class="row">
-                            <h3>{{$rute->plane->name}} {{$rute->plane->code}}</h3>
+                    <div class="row">
+                        <div class="plane">
+                            <img style="width: 150px;margin-left: -2px" src="{{asset('img/logo/'.$rute->plane->logo)}}" alt="" >
                         </div>
                     </div>
                     <div class="row">
@@ -93,16 +94,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             $diff  = $start->diff($end);
 
                         @endphp
-                        <div class="jam">
-                            <div class="col-md-2">
+                        <div class="jam" style="font-size: 18px;margin-left: -5px;margin-top: 10px;">
+                            <div class="col-md-3 col-xs-3 dari">
                                 {{date('H:i',strtotime($rute->depart_at))}} <br>
-                                {{$rute->band1->nama_bandara}} 
+                                {{$rute->band1->nama_bandara}} ({{$rute->band1->iso}} )
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3 col-xs-3">
                                 {{date('H:i',strtotime($rute->arrive_at))}} <br>
-                                {{$rute->band2->nama_bandara}} 
+                                {{$rute->band2->nama_bandara}} ({{$rute->band2->iso}} )
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3 col-xs-3">
+                                Durasi <br>
                                 {{$diff->h}}j <span>{{$diff->i}}m
                             </div>
                         </div>
@@ -111,77 +113,38 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div>
         </div>
         <div class="col-md-4">
-            <div class="box-reservasi box-reservasi2">
-                <div class="data">
-                    <p>Summary</p>
+            <div class="row">
+                <div class="box-reservasi box-reservasi2">
+                    @php
+                        $harga = $rute->harga;
+                        $total = $harga*$_GET['penumpang'];
+                    @endphp
+                    <div class="data">
+                        <p>Summary</p>
+                    </div>
+
+                    <p>
+                        {{$rute->plane->name}} (Penumpang) x {{$_GET['penumpang']}}
+                        <span style="float: right;margin-right: 15px" class="harga">{{number_format($total,2)}}</span>
+                    </p>
+                    <p>
+                        Total Biaya :
+                        <span style="float: right;margin-right: 15px" class="harga">{{number_format($total,2)}}</span>
+                    </p>
                 </div>
-                <p>
-                    
-                </p>
+            </div>
+            <div class="row">
+                <a href="/pemesanan/{{$rute->id}}/detail?penumpang={{$_GET['penumpang']}}" style="display: block;text-align: center;margin-top: 20px;padding: 10px 20px;color: white;background-color: #F96D01">Lanjut ke Pemesanan</a>
             </div>
         </div>
     </div>
 
 
-    <div class="isi">
-        
-      
-        @php
-            $count = 1;
-        @endphp
-       <div class="box" style="margin-top: 50px">
-                <div class="box-body">
-                    <table class="table">
-                        <tbody>
-                            <tr class="tr-h">
-                                <th>Maskapai</th>
-                                <th>Berangkat</th>
-                                <th>Tiba</th>
-                                <th>Durasi</th>
-                                <th>Dari</th>
-                                <th>Tujuan</th>
-                                <th>Harga per orang</th>
-                                
-                            </tr>
-                           
-                                <tr class="tr-isi">
-                                    <td style="border-left:1px solid #1BA0E2">{{$rute->plane->name}}</td>
-                                    <td>{{date('H.i', strtotime($rute->depart_at))}}</td>
-                                    <td>{{date('H.i', strtotime($rute->arrive_at))}}</td>
-                                    <td>
-                                        @php
-                                            $start = new DateTime($rute->depart_at);
-                                            $end   = new DateTime($rute->arrive_at);
-                                            $diff  = $start->diff($end);
-
-                                        @endphp
-                                        <p>{{$diff->h}}j <span>{{$diff->i}}m</span></p>
-                                    </td>
-                                    <td>{{$rute->from->nama}} ({{$rute->from->iso}}),<br>{{$rute->band1->nama_bandara}}</td>
-                                    <td>{{$rute->to->nama}} ({{$rute->to->iso}}),<br>{{$rute->band2->nama_bandara}}</td>
-                                    <td style="border-right:1px solid #1BA0E2">
-                                        <p class="harga">{{number_format($rute->harga,2)}}</p>
-                                        <a href="/pemesanan/{{$rute->id}}" class="choose">Pilih</a> <br><br>
-                                        <p>*Sisa {{$rute->kursi}} kursi</p>
-                                    </td>
-                                    
-                                </tr>
-
-           
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            @if($rute->count() == 0 )
-                <div class="blank-record">
-                    <h3 style="text-align: center;padding: 20px">Tidak ada jadwal penerbangan</h3>
-                </div> 
-            @endif
-    </div><!-- ISI -->
+   
 </div><!-- CONTAINER -->
 
 <!-- footer-top -->
-    <div class="footer-top">
+    <div class="footer-top" style="margin-top: 100px">
         <div class="container">
             <div class="col-md-3 footer-top-grid">
                 <h3>About <span>Travel</span></h3>

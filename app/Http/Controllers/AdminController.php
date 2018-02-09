@@ -8,6 +8,8 @@ use App\Models\Rute;
 use App\Models\User;
 use App\Models\Kota;
 use App\Models\Bandara;
+use App\Models\Transaksi;
+use App\Models\Reservasi;
 use Carbon\Carbon;
 
 class AdminController extends Controller
@@ -24,8 +26,16 @@ class AdminController extends Controller
     }
 
     public function store(Request $request){
-
+        $file = $request->file('logo');
+        $filenames = $file->getClientOriginalName();
+                    $filenames = $string = preg_replace('/\s+/', '', $filenames);
+                    $extension = $file->getClientOriginalExtension();
+                    $picture = date('His').$filenames;
+                    $destinationPath = public_path('img/logo');
+                    $file->move($destinationPath, $picture);
+            
     	Transportation::create([
+            'logo' => $picture,
     		'code' => $request->code,
     		'name' => $request->name,
     		'description' => $request->deskripsi,
@@ -42,9 +52,22 @@ class AdminController extends Controller
     }
 
     public function show(Request $request,$id){
-
         $plane = Transportation::find($id);
-    
+
+        $file = $request->file('logo');
+
+        if(!empty($file)){
+            $filenames = $file->getClientOriginalName();
+                    $filenames = $string = preg_replace('/\s+/', '', $filenames);
+                    $extension = $file->getClientOriginalExtension();
+                    $picture = date('His').$filenames;
+                    $destinationPath = public_path('img/logo/');
+                    $file->move($destinationPath, $picture);
+                    $plane->logo = $picture;
+                    $plane->save();
+        }
+
+        
         $plane->update([
             'code' => $request->code,
             'name' => $request->name,
@@ -66,7 +89,7 @@ class AdminController extends Controller
 
 
 
-   // ==================================================================== RUTE
+   // =============================================================================================== RUTE
 
    public function createrute(){
         $planes = Transportation::all();
@@ -276,6 +299,25 @@ class AdminController extends Controller
    }
 
 
+   public function konfirmasitrx(){
+
+        $trx = Transaksi::get();
+
+        return view('admin.manage.transaksi',compact('trx'));
+
+
+   }
+
+   public function konfirmtrx(Request $request,$id){
+        $trx = Transaksi::find($id);
+        $reservasi = Reservasi::where('status',0)->where('pemesan_id',$trx->pemesan_id)->get();
+        $reservasi->update([
+            'status' => 1,
+        ]);
+
+        return redirect('admin/transaksi');
+            
+   }
 
 }
 
