@@ -141,7 +141,10 @@ class AdminController extends Controller
         $rute = Rute::findOrFail($id);
         $kotas = Kota::with('bandara')->get();
         $plane = Transportation::all();
-        return view('admin.manage.rute_u',compact('rute','plane','kotas'));
+        $kursi = $rute->kursi;
+        $band = Bandara::all();
+        $band2 = Bandara::all();
+        return view('admin.manage.rute_u',compact('rute','kursi','plane','kotas','band','band2'));
     }
 
     public function showrute(Request $request,$id){
@@ -162,7 +165,8 @@ class AdminController extends Controller
         ]);
 
         $plane->save();
-        return redirect('admin/mrute/')->with('berhasil','Berhasil update daftar pesawat');
+        $tgl = date('d M Y',strtotime($plane->depart_at));
+        return redirect('admin/mrute/')->with('berhasil','Berhasil update daftar rute dari '.$plane->from->nama.' ke '.$plane->to->nama.' keberangkatan : '. $tgl);
     }
 
    public function deleterute($id){
@@ -299,9 +303,13 @@ class AdminController extends Controller
    }
 
 
+
+   // ==========================================================================================================  TRANSAKSI
    public function konfirmasitrx(){
 
-        $trx = Transaksi::get();
+        $trx = Transaksi::groupBy('pemesan_id')->whereHas('reservasis',function($query){
+            $query->where('status',0);
+        })->get();
 
         return view('admin.manage.transaksi',compact('trx'));
 
@@ -310,14 +318,34 @@ class AdminController extends Controller
 
    public function konfirmtrx(Request $request,$id){
         $trx = Transaksi::find($id);
-        $reservasi = Reservasi::where('status',0)->where('pemesan_id',$trx->pemesan_id)->get();
-        $reservasi->update([
-            'status' => 1,
-        ]);
+        $reservasi = Reservasi::where('status',0)->where('pemesan_id',$trx->pemesan_id)->first();
+        $rute = $reservasi->rutes;
+        $customer = $reservasi->pemesans->customers;
 
-        return redirect('admin/transaksi');
+        $reservasi->status = 1;
+        $reservasi->save();
+
+        $rute->kursi = $rute->kursi - count($customer->where('kursi','!=' ,null));
+        $rute->save();
+
+        return redirect('admin/transaksi')->with('pesan','Berhasil konfirmasi pembayaran');
             
    }
+
+   public function deletetrx(Request $request,$id){
+        $trx = Transaksi::find($id);
+        $trx->delete();
+        
+        return redirect('admin/transaksi')->with('pesan','Berhasil menghapus transaksi');
+   }
+
+   // =============================================================================================================== RESERVASI
+   public function viewallRes(){
+        $reservasi = Reservasi::get();
+        return view('admin.manage.reservasi',compact('reservasi'));
+   }
+
+
 
 }
 

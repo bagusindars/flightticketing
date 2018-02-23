@@ -10,11 +10,12 @@ class Customer extends Model
      	'nama' ,'pemesan_id' ,'token' , 'gender','kursi','rute_id',
      ];
 
+     public $timestamps = false;
      public function pemesans(){
      	return $this->hasOne('App\Models\Pemesan','id');
      }
 
-    
-    
+	    
+	    
 }
 

@@ -32,12 +32,12 @@
 						<div class="panel-body">
 							<div class="form-group">
 								<label for="">Nama Lengkap</label>
-								<input type="text" class="form-control" name="namapemesan"required>
+								<input type="text" class="form-control" value="{{ old('namapemesan') }}" name="namapemesan" required>
 								*Sesuai KTP/paspor/SIM (tanpa tanda baca atau gelar)
 							</div>
 							<div class="form-group">
 								<label for="">Email</label>
-								<input type="email" class="form-control" name="emailpemesan" required>
+								<input type="email" class="form-control" name="emailpemesan" required value="{{ old('emailpemesan') }}">
 							</div>
 							<div class="form-group">
 								<label for="">Jenis Kelamin</label>
@@ -48,20 +48,23 @@
 							</div>
 							<div class="form-group">
 								<label for="">Alamat</label>
-								<input type="text" class="form-control" name="alamatpemesan" required>
+								<input type="text" class="form-control" name="alamatpemesan" required value="{{ old('alamatpemesan') }}" >
 								*Sesuai KTP/paspor/SIM
 							</div>
 							<div class="form-group">
 								<label for="">Kode</label>
-								<input type="text" class="form-control" name="kode" required>
+								<input type="text" class="form-control" name="kode" required value="{{ old('kodepemesan') }}">
 								*Tentukan kode anda(bebas). ex : lpjweud. Pastikan anda mengingatnya
+								@if(!empty($gagal))
+									<br><span style="color: red">{{ $gagal }}</span>
+								@endif
 							</div>
 							<div class="form-group">
 								<input type="hidden" name="rute_id" value="{{$rute->id}}">
 							</div>
 							<div class="form-group">
 								<label for="">No. Handphone</label>
-								<input type="text" class="form-control" name="phonepemesan" required placeholder="+628568789">
+								<input type="text" class="form-control" name="phonepemesan" required placeholder="+628568789" value="{{ old('phonepemesan') }}">
 							</div>
 						</div>
 					</div>
@@ -77,6 +80,9 @@
 									<label for="">Kode Pemesan</label>
 									<input type="text" class="form-control" name="kodepemesanuser" required>
 									*Tentukan kode anda(bebas). ex : lpjweud. Pastikan anda mengingatnya
+									@if(!empty($gagal))
+										<br><span style="color: red">{{ $gagal }}</span>
+									@endif
 								</div>
 							</div>
 						</div>
@@ -108,6 +114,7 @@
 					{{ csrf_field() }}
 					<div class="form-group">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<input type="hidden" name="token" value="{{ str_random(10) }}">
 						<input type="submit" class="input-submit" value="Lanjutkan" style="margin-top: 10px;float: right;font-size:18px;padding: 10px 35px;background-color: #0770CD;color: white;border:none;font-weight: bold">
 					</div>
 				</div>

@@ -28,7 +28,7 @@ body a:hover{
 /*-- banner --*/
 .banner{	
 	min-height: 900px;
-    background: url(../images/banner1.jpg) no-repeat 0px 0px;
+    background: url(../images/rocket.jpg) no-repeat 0px 0px;
     background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -37,8 +37,9 @@ body a:hover{
 	position:relative;
 }
 .banner1{
-	min-height: 500px;
-    background: url(../images/banner.jpg) no-repeat 0px 0px;
+	min-height: 250px;
+
+    background:url(../images/banner.jpg) no-repeat 0px 0px ;
     background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -59,8 +60,9 @@ body a:hover{
 .head-logo a{
 	color:#FFFFFF;
     text-decoration: none;
-	font-size: 3em;
+	font-size: 32px;
 	outline:none;
+
 }
 .head-logo a span{
 	color:#E47719;
@@ -140,7 +142,7 @@ ul.resp-tabs-list {
 }
 div#horizontalTab {
 	background: none;
-    width: 70% !important;
+    width: 100%; 
     margin: 0 auto !important;
   }
 .tab_list li:nth-child(2){
@@ -187,7 +189,7 @@ h2.resp-accordion {
 }
 .resp-tab-content {
 	display: none;
-	background: rgba(255, 255, 255, 0.64);
+	background: #FECA42;
 }
 .reservation ul {
     margin: 0;
@@ -225,7 +227,7 @@ h2.resp-accordion:hover{
 .book_date form {
     margin: -1em 0 0;
 }
-.book_date input[type="text"], .book_date input[type="date"]{
+.book_date input[type="text"], .book_date input[type="date"], .book_date select{
         width: 100% !important;
     color: #9F9F9F;
     font-size: 14px;
@@ -288,11 +290,11 @@ li.adult {
 }
 .date_btn input[type="submit"]{
 	outline:none;
-	background:#A0BBF7;
+	background:#FA3C18;
 	font-size:16px;
-	color:#fff;
+	color:#E6D3CD;
 	padding:13px 0;
-	width:30%;
+	width:100%;
 	border:none;
 	-webkit-transition: all 0.5s ease-out;
    -moz-transition: all 0.5s ease-out;
@@ -1114,16 +1116,17 @@ p.ever{
 /*-- //contact --*/
 /*-- footer-top --*/
 .footer-top{
-	background: #565656;
+	background: #E47719;
     font-style: normal;
     padding: 4em 0;
+    color: white;
 	}
 .footer-top-grid h3{
 	color: #fff;
     font-size: 1.5em;
     margin: 0;
     padding-bottom: 1.5em;
-    border-bottom: 1px solid #676767;
+    border-bottom: 1px solid white;
     font-weight: 200;
 	margin:0 0 1em;
 	}
@@ -1132,7 +1135,7 @@ p.ever{
 	margin-left: .3em;
 	}
 .footer-top-grid p{
-	color: #B8B8B8;
+	color: white;
     font-size: 14px;
     line-height: 1.8em;
     margin: 0;
@@ -1146,9 +1149,9 @@ p.ever{
 	}
 .footer-top-grid ul.tag2 li a{	
 	font-size:12px;
-	color: #CCC8C8;
+	color: black;
 	padding: 3px 7px;
-	background:#2F2F2F;
+	background:white;
 	}
 .footer-top-grid ul.tag2 li a:hover{
 	text-decoration: none;
@@ -1201,7 +1204,7 @@ p.ever{
 /*-- footer --*/
 .footer{
 	padding: 2em 0;
-    background: #616161;
+    background: #363442;
 	}
 .footer-left{
 	float:left;
@@ -1247,12 +1250,15 @@ p.ever{
 /*-- footer --*/
 /*-- sign-in --*/
 .sign-in{
-	background:url(../images/18.png) 0px 0px;
+	background:url(../images/rocket.jpg) 0px 0px ;
+	background-size: cover;
 	padding:5em 0;
 	}
 .sign-in-form{
-	width: 50%;
+	width: 70%;
 	margin: 0 auto;
+	background-color: #FECA42;
+	padding: 100px;
 	}
 .in-form h3{
 	color: #fff;

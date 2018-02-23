@@ -74,12 +74,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
              <nav class="navbar navbar-primary navbar-static-top" style="margin-bottom: 0;padding: 12px">
                     <div class="navbar-header" style="float: left;">
                         <div class="head-logo">
-                            <a href="/" style="color: #605C12;"><span style="font-size: 25px">X</span>Travel</a>
+                           <a href="/" style="color: #605C12;font-family: 'Ropa Sans', sans-serif"><img style="width: 40px" src="{{ asset('images/logo/rocket.png') }}" alt="">Travel</a>
                         </div>
                        
                     </div>
 
-                     <ul class="nav navbar-nav navbar-right" style="margin-top: 20px;font-size: 20px;">
+                     <ul class="nav navbar-nav navbar-right" style="margin-top: 10px;font-size: 20px;">
                             <!-- Authentication Links -->
                           <li class="step-nav-li li-1 {{ request()->path() == 'pemesanan/'.$rute->id.'/detail' ? 'active':'' }} "><span class="step-nav">1</span>Isi Data</li>
                           <li class="step-nav-li li-2 {{ (request()->path() == 'pemesanan/'.$rute->id.'/detailstp2') || (request()->path() == 'pemesanan/'.$rute->id.'/detailstp3') ? 'active':'' }} "><span class="step-nav">2</span>Konfirmasi Data</li>

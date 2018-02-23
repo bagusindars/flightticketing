@@ -42,5 +42,9 @@ class Rute extends Model
         return $this->belongsToMany('App\Models\Pemesan');
     }
   
+    public function customers(){
+        return $this->hasMany('App\Models\Customer');
+    }
    
+    public $timestamps = false;
 }

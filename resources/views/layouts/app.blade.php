@@ -86,7 +86,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                     <!-- Branding Image -->
                     <div class="head-logo">
-                        <a href="/" style="color: #605C12;"><span style="font-size: 25px">X</span>Travel</a>
+                        <a href="/" style="color: #605C12;font-family: 'Ropa Sans', sans-serif"><img style="width: 40px" src="{{ asset('images/logo/rocket.png') }}" alt="">Travel</a>
                     </div>
                    
                 </div>
@@ -94,8 +94,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                  <ul class="nav navbar-nav navbar-right" style="margin-top: 7px">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a href="{{ route('login') }}" style="float: left;">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a href="{{ route('login') }}" style="float: left;{{ request()->path() == 'login' ? 'color: #E47719' : '' }} ">Login</a></li>
+                            <li><a href="{{ route('register') }}" style="{{ request()->path() == 'register' ? 'color: #E47719' : '' }} ">Register</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">

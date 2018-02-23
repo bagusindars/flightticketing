@@ -13,23 +13,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="container-fluid">
                 <nav class="pull">
                     <ul class="nav">
-                        <li><a href="/#home" class="active"> Home</a></li>
-                        <li><a href="/#about"> About</a></li>
-                        <li><a href="/#popular" class="menu">Popular Places<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></li>
-                            <ul class="nav-sub">
-                                <li><a href="index.html">Place 1</a></li>                                             
-                                <li><a href="index.html">Place 2</a></li>                                                                                               
-                                <li><a href="index.html">Place 3</a></li> 
-                            </ul>
-                            <script>
-                                $( "li a.menu" ).click(function() {
-                                $( "ul.nav-sub" ).slideToggle( 300, function() {
-                                // Animation complete.
-                                });
-                                });
-                            </script>
-                        <li><a href="/"> Events</a></li>
-                        <li><a href="/#mail"> Mail us</a></li>
+                        <li><a href="/"> Home</a></li>
+                        <li><a href="/jadwal"  class="active"> Pesan Tiket</a></li>                  
+                        <li><a href="/konfirmasi"> Konfirmasi Pembayaran</a></li>
                     </ul>
                 </nav>
             </div>
@@ -158,6 +144,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                               </select>
                             </div>
                         </div> 
+                        <div class="clear"></div>
                        <div class="container">
                         <input type="submit" class="submit-form-jadwal" name="search" value="Search Flights" />
                         </div>

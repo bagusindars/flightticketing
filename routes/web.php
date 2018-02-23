@@ -40,6 +40,9 @@ Route::group(['middleware' => 'auth'],function(){
 		Route::post('admin/mairlist/{id}','AdminController@show');
 		Route::delete('admin/mairlist/{id}','AdminController@delete');
 
+		Route::get('admin/mreservasi','AdminController@viewallRes');
+		Route::delete('admin/mreservasi/{id}','AdminController@deleteres');
+
 		Route::get('admin/mrute','AdminController@viewallRute');
 		Route::get('admin/create/rute','AdminController@createrute');
 		Route::get('admin/create/rute/get1/{id}', 'AdminController@getBandara1');
@@ -86,6 +89,7 @@ Route::get('/pemesanan/{id}/detail/','frontcont@pemesananreg');
 
 Route::post('/pemesanan/{id}/detail2/','frontcont@inputcustomer');
 Route::get('/pemesanan/{id}/detailstp2/','frontcont@cekcustomer');
+
 Route::post('/pemesanan/{id}/detail3/','frontcont@pilihkursi');
 Route::get('/pemesanan/{id}/detailstp3/','frontcont@konfirmasi');
 Route::get('/pemesanan/{id}/pembayaran/','frontcont@pembayaran');

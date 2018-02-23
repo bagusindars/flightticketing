@@ -29,7 +29,7 @@
 								<option value="" disabled selected>Kota</option>
 							@foreach($kotas as $kota)
 						<!-- 		<option value="{{$kota->nama}} ({{$kota->iso}})">{{$kota->nama}} ({{$kota->iso}})</option> -->
-									<option value="{{$kota->id}}">{{$kota->nama}} ({{$kota->iso}})</option>		
+									<option value="{{$kota->id}}" {{ $rute->rute_from == $kota->id ? 'selected' : ''}}>{{$kota->nama}}</option>		
 									
 							@endforeach
 						</select>
@@ -37,7 +37,11 @@
 					<div class="form-group  has-feedback">
 						<label for="bandara1">Bandara</label>
 		        		<select name="bandara1" id="bandara1" required>
-								<option value="" disabled selected>Bandara</option>		
+		        				@foreach($band as $band)
+		        					@if($rute->bandara1 == $band->id)
+										<option value="{{$band->id}}" >{{$band->nama_bandara}}</option>
+									@endif
+								@endforeach
 						</select>
 					</div>
 				
@@ -46,15 +50,20 @@
 		        		<select name="rute_to" id="" required>
 								<option value="" disabled selected>Kota</option>
 							@foreach($kotas as $kota)
-								<option value="{{$kota->id}}">{{$kota->nama}} ({{$kota->iso}})</option>		
+								<option value="{{$kota->id}}" {{ $rute->rute_to == $kota->id ? 'selected' : ''}}>{{$kota->nama}}</option>		
 							@endforeach
 						</select>
 					</div>
 					<div class="form-group  has-feedback">
 						<label for="bandara2">Bandara</label>
 		        		<select name="bandara2" id="bandara2" required>
-								<option value="" disabled selected>Bandara</option>
-							
+
+		        			@foreach($band2 as $band)
+
+		        					@if($rute->bandara2 == $band->id)
+										<option value="{{$band->id}}" >{{$band->nama_bandara}}</option>
+									@endif
+								@endforeach
 						</select>
 					</div>
 
@@ -65,12 +74,12 @@
 					<div class="form-group  has-feedback">
 		        		<select name="plane" id="">
 							@foreach($plane as $planes)
-								<option value="{{$planes->id}}" {{ old('plane') ==  $planes->id ? "selected" : '' }}>{{$planes->name}}</option>		
+								<option value="{{$planes->id}}" {{ $rute->transport_id == $planes->id ? 'selected' : ''}}>{{$planes->name}}</option>		
 							@endforeach
 						</select>
 					</div>
 					<div class="form-group  has-feedback">
-		        		<input type="text" class="form-control" value="{{old('kursi')}}" required name="kursi" placeholder="Jumlah Penumpang" readonly="true">
+		        		<input type="text" class="form-control" value="{{$kursi}}" required name="kursi" placeholder="Jumlah Penumpang" readonly="true">
 		        		<i class="glyphicon glyphicon-user form-control-feedback"></i>
 					</div>
 					{{ csrf_field() }}

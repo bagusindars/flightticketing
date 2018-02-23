@@ -81,9 +81,6 @@ a.admin-action:hover{
 
 }
 
-.banner1{
-    min-height: 170px;
-}
 .header-top .label-banner{
    
     font-size: 50px;
@@ -93,7 +90,7 @@ a.admin-action:hover{
 }
 
 .banner1{
-    background-image: url(../images/back.jpg);
+    background-image: url(../images/rocket.jpg);
 
 }
 .isi{

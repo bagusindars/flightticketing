@@ -6,6 +6,11 @@ $(window).on('load',function() {
     $('.pull').slideToggle();
   });
 
+  $('.gambar-awal').click(function(){
+        $('.container-homepage').fadeIn(500);
+        $(this).hide(800);
+
+  });
   	$('select[name=rute_from]').on('change', function() {
 	   var self = this;
 	   $('select[name=rute_to]').find('option').prop('disabled', function() {
@@ -145,6 +150,7 @@ $(window).on('load',function() {
 	    $('#logo-input-file').on('change', function() {
 	        imagesPreview(this, 'div.imgPreview');
 	    });
+
 
 	     $('#bukti-input-file').on('change', function() {
 	        imagesPreview(this, 'div.imgPreview');

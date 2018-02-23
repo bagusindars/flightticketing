@@ -41,7 +41,7 @@
       </a>
       <ul class="treeview-menu">
         <li class="active"><a href="{{request()->root()}}/admin/muser"><i class="fa fa-users"></i> Users</a></li>
-        <li><a href="{{request()->root()}}/admin/mreservation"><i class="fa fa-bookmark-o"></i>Reservation</a></li>
+        <li><a href="{{request()->root()}}/admin/mreservasi"><i class="fa fa-bookmark-o"></i>Reservation</a></li>
         <li><a href="{{request()->root()}}/admin/mrute"><i class="fa fa-plane" aria-hidden="true"></i>Rute</a></li>
         <li><a href="{{request()->root()}}/admin/mkota"><i class="fa fa-building" aria-hidden="true"></i>Kota</a></li>
         <li><a href="{{request()->root()}}/admin/mbandara"><i class="fa fa-building" aria-hidden="true"></i>Bandara</a></li>
@@ -70,7 +70,7 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="admin/transaksi"><i class="fa fa-bookmark-o"></i>Transaksi</a></li>
+        <li><a href="{{request()->root()}}/admin/transaksi"><i class="fa fa-bookmark-o"></i>Transaksi</a></li>
       </ul>
     </li>
   </ul>

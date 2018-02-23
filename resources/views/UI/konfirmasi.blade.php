@@ -6,30 +6,47 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 
 @extends('layouts.app')
-
+          <style>
+    .cek.activemerah+label{
+        color: white;
+        background-color: red;
+        padding:2px 35px 2px 10px;
+        margin-left: -17px;
+    }
+    .cek.activecus+label{
+        color: white;
+        background-color: blue;
+        padding:2px 35px 2px 10px;
+        margin-left: -17px;
+    }
+    .ket .isi,.ket .kosong,.ket .anda{
+        padding: 5px 20px;
+        float: right;
+        margin-left: 5px;
+    }
+    .ket .isi{
+        background-color: red;
+        color: white;
+    }
+    .ket .kosong{
+        background-color: #DEDEDE;
+        color: #636B6F;
+        border:1px solid #C5C7C8;
+    }
+    .ket .anda{
+        background-color: blue;
+        color: white;
+    }
+</style>
 @section('banner')
     <div class="banner1">
         <div class="navigation">
             <div class="container-fluid">
                 <nav class="pull">
                     <ul class="nav">
-                        <li><a href="/#home" class="active"> Home</a></li>
-                        <li><a href="/#about"> About</a></li>
-                        <li><a href="/#popular" class="menu">Popular Places<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></li>
-                            <ul class="nav-sub">
-                                <li><a href="index.html">Place 1</a></li>                                             
-                                <li><a href="index.html">Place 2</a></li>                                                                                               
-                                <li><a href="index.html">Place 3</a></li> 
-                            </ul>
-                            <script>
-                                $( "li a.menu" ).click(function() {
-                                $( "ul.nav-sub" ).slideToggle( 300, function() {
-                                // Animation complete.
-                                });
-                                });
-                            </script>
-                        <li><a href="/"> Events</a></li>
-                        <li><a href="/#mail"> Mail us</a></li>
+                        <li><a href="/" > Home</a></li>
+                        <li><a href="/jadwal"> Pesan Tiket</a></li>                 
+                        <li><a href="/konfirmasi"  class="active"> Konfirmasi Pembayaran</a></li>
                     </ul>
                 </nav>
             </div>
@@ -51,10 +68,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 @endsection
 
 @section('content')
+
 <div class="container">
     <div class="isi" style="margin-top: 30px;">
         @if(!empty($berhasil))
-            <div class="alert alert-succces">{{ $berhasil }}</div>
+             <div class="alert alert-success">{{$berhasil}}</div>
         @endif
 
         <div class="col-md-5">
@@ -80,6 +98,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div>
 
             @if(!empty($reservasi))
+  
                 <div class="panel">
                     <div class="jumbotron-page-reservasi">
                         <div class="caption" style="border-bottom: 1px solid #dadada;padding-bottom: 10px;font-weight: bold">
@@ -129,19 +148,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                    <div class="panel kiri" style="padding: 30px"> 
                         <h4>
                             Nama : {{$customer->nama}} <br>
-                            Gender : {{$customer->gender}}
+                            Gender : {{$customer->gender}} <br>
+                            Kursi : {{$customer->kursi}}
                         </h4>
                    </div>
                 @endforeach
                 <div class="panel kiri" style="padding: 30px">
-                    <h4>Status : {{ $reservasi->status == 0 ? 'Belum Lunas' : 'Lunas'  }}</h4>
+                    <h4>
+                        Status : 
+                        @if($reservasi->status == 0)
+                            <span style="color: red">Belum Lunas</span>
+                        @else
+                            <span style="color: green">Lunas</span>
+                        @endif
+                    </h4>
                 </div>
             @endif
         </div>
 
         <div class="col-md-7"> <br>
             @if(!empty($pesanber))
-                <div class="alert alert-succces">{{$pesanber}}</div>
+                <div class="alert alert-success" style="font-size: 19px;font-weight: bold">{{$pesanber}}</div>
             @elseif(!empty($pesangal))
                 <div class="alert alert-danger">{{$pesangal}}</div>
             @endif
@@ -154,8 +181,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <label for="">Data Pemesan</label>
                             <p>Pemesanan atas nama</p>
                             <input type="text" class="form-control" readonly="true" value="{{$reservasi->pemesans->nama}}" style="margin-bottom: 5px">
-                            <label for="">No. Hp {{ $reservasi->pemesans->phone }}</label> <br>
-                            <label for="">Pembayaran via : {{ $reservasi->bank }}</label>
+                            <label for="">No. Hp {{ $reservasi->pemesans->phone }}</label><br>
+                            <label for="">Pembayaran via : {{ $reservasi->bank }}</label> <br>
+                            <label for="">Total tagihan : <span class="harga">{{ number_format($reservasi->price,2) }} </span></label>
                             <label for=""></label>
                         </div>
                         <div class="form-group">
@@ -179,9 +207,60 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <div class="clear"></div>
                    </form>
                 </div>
-                @else
-                    Pembayaran anda telah di konfirmasi oleh kami.
+                @else <br> <br> <br>
+                    <div class="panel kanan" style="padding: 30px;background-color: #41CE6B; color: white;font-weight: bold">
+                        <h4>Pembayaran anda telah di konfirmasi oleh kami. Terima kasih atas kepercayaan anda</h4>
+                    </div>
                 @endif
+                <br>
+                <h3 class="title-header openseat" style="text-align: center;background-color: #F96D01;cursor: pointer;color: white;padding: 5px 20px">Lihat Kursi</h3> <br>
+                <div class="clear"></div>
+                <div class="seat-see" style="display: none;">
+                    <div class="supir" style="margin-bottom: 40px;text-align: center;margin-right: 1px">
+                        <span class="co-pilot">Co-Pilot</span>
+                        <span class="pilot">Pilot</span>
+                    </div>
+                    <div class="ket">
+                        <span class="isi">Telah dipesan</span>
+                        <span class="kosong">Tersedia</span>
+                        <span class="anda">Anda</span>
+                    </div> <br>
+                    <div class="clear"></div>
+                
+                @php
+                        $seat = array();
+                        $seatcus = array();
+                        $type = ['A'];
+                        foreach($reservasi->rutes->customers as $kur){
+                            $seat[] = $kur->kursi;
+                        }
+                        foreach($reservasi->pemesans->customers as $cus){
+                            $seatcus[] = $cus->kursi;
+                        }
+                        
+                    @endphp
+                    @for($i = 1; $i <= $reservasi->rutes->plane->seat_qty; $i++)    
+                            <div class="col-md-1 col-xs-1">
+                                @foreach($type as $x)
+                                <div class="col-md-6">
+                                    <input required type="checkbox"  name="seat[]"  
+                                    @php
+                                    if(in_array($x.$i,$seat)){
+                                        
+                                        if( in_array($x.$i,$seatcus) ){
+                                            echo "class='cek activecus' disabled style='display : none'";
+                                        }else{
+                                            echo "class='cek activemerah' disabled style='display : none' ";
+                                        }
+                                    }
+                                    @endphp
+                                    value="{{$x.$i}}" disabled style="transform: scale(2);" >
+                                    <label for=seat">{{$x.$i}}</label>
+                                </div>
+                                @endforeach
+                            </div>
+                    @endfor     
+                </div>
             @endif
         </div>
     </div><!-- ISI -->

@@ -15,23 +15,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="container-fluid">
 				<nav class="pull">
 					<ul class="nav">
-						<li><a href="index.html" class="active"> Home</a></li>
-						<li><a href="#about" class="scroll"> About</a></li>
-						<li><a href="#portfolio" class="menu scroll">Popular Places<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></a></li>
-							<ul class="nav-sub">
-								<li><a href="#portfolio" class="scroll">Place 1</a></li>                                             
-								<li><a href="#portfolio" class="scroll">Place 2</a></li>																								
-								<li><a href="#portfolio" class="scroll">Place 3</a></li> 
-							</ul>
-							<script>
-								$( "li a.menu" ).click(function() {
-								$( "ul.nav-sub" ).slideToggle( 300, function() {
-								// Animation complete.
-								});
-								});
-							</script>
-						<li><a href="#events" class="scroll"> Events</a></li>
-						<li><a href="#mail" class="scroll"> Mail us</a></li>
+						<li><a href="/" class="active"> Home</a></li>
+						<li><a href="/jadwal"> Pesan Tiket</a></li>					
+						<li><a href="/konfirmasi"> Konfirmasi Pembayaran</a></li>
 					
 					</ul>
 				</nav>
@@ -49,13 +35,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>
 		</div>
 		<div class="banner-info">
-			<div class="container">
+			<div class="gambar-awal" style="cursor: pointer;">
+				<div class="gambar" style="justify-content: center;display: flex;">
+					<img src="{{ asset('images/logo/rocket.png') }}"> <br>
+				</div>
+				<h3 style="text-align: center;color: white;">Touch me if you want to fly</h3>
+			</div>
+			<div class="container container-homepage" style="width: 87%;display: none;">
 				<h1>Book Your Best Trip</h1>
-				<div class="sap_tabs">	
+				<div class="sap_tabs" >	
 					<div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
 						  <ul class="resp-tabs-list">
 							 
-							  <li class="resp-tab-item grid2" aria-controls="tab_item-1" role="tab"><span><i class="glyphicon glyphicon-plane" aria-hidden="true"></i>Flights</span></li>
+							  <li class="resp-tab-item grid2" aria-controls="tab_item-1" role="tab"><span style="font-size: 20px"><img src="{{ asset('images/logo/rocket.png') }}" style="width: 50px;margin-right: 10px" alt="">Flight with us</span></li>
 							  
 							  <div class="clear"></div>
 						  </ul>
@@ -67,13 +59,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1" style="display: block">
 									<div class="facts">
 										<div class="flights">
-											<div class="reservation">
-												<ul>		
-													<li  class="span1_of_1 desti1">
+											<div class="row">
+												<div class="col-md-3">
+
 														 <div class="book_date">
-																<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+														 		<label for="">Keberangkatan</label>
+															
 																<div class="form-group  has-feedback">
-												        		<select required style="text-indent: 42px;width: 100%" name="rute_from" id="">
+												        		<select required style="width: 100%" name="rute_from" id="">
 																		<option value="" disabled selected>Dari</option>
 																	@foreach($kota as $kotas)
 																		<option value="{{$kotas->id}}">{{$kotas->nama}}</option>		
@@ -82,11 +75,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 												        		
 															</div>
 														 </div>					
-													 </li>
-													 <li  class="span1_of_1 desti1">
+												</div>
+												<div class="col-md-3">
 														 <div class="book_date">
-																<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-																<select required style="text-indent: 42px;width: 100%" name="rute_to" id="">
+														 		<label for="">Tujuan</label>
+																
+																<select required style="width: 100%" name="rute_to" id="">
 																		<option value="" disabled selected>Tujuan</option>
 																	@foreach($kota as $kotas)
 																		<option value="{{$kotas->id}}">{{$kotas->nama}}</option>		
@@ -94,86 +88,54 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 																</select>
 												        		
 														 </div>					
-													 </li>
+													 
 													 <div class="clearfix"> </div>
-												</ul>
-											</div>
-											<div class="reservation">
-												<ul>	
-													 <li  class="span1_of_1">
-														 <h5>Departure</h5>
-														 <div class="book_date">
-														<form>
-															<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-															<input class="date datepicker" name="depart_at" id="datepicker" type="date" value="19/10/2015" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '19/10/2015';}" required="">
-														 </form>
-														 </div>		
-													 </li>
-													 <li  class="span1_of_1 left">
-														 <h5>Return</h5>
-														 <div class="book_date">
-														<form>
-															<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-															<input class="date" name="a_at" id="datepicker" type="date" value="19/10/2015" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '19/10/2015';}" required="">
-														 </form>
-														 </div>					
-													 </li>
-													 <div class="clearfix"> </div>
-												</ul>
-											</div>
-											<div class="reservation">
-												<ul>
-													<li class="span1_of_1 adult">
-														 <h5>Penumpang</h5>
+											
+												</div>
+												<div class="col-md-5">
+													<div class="reservation">
+														<label for="">Tanggal Keberangkatan</label>
+														<div class="book_date">
+																
+																<input class="date datepicker" name="depart_at" id="datepicker" type="date" value="19/10/2015" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '19/10/2015';}" required="">
+														
+															 </div>		
+
+													</div>
+												</div>
+												<div class="col-md-1">
+													<div class="reservation">
+														<label for="">Penumpang</label>
+														
+															
+																  <select style=" padding: 12px 30px" id="1 Traveller" name="penumpang" onchange="change_country(this.value)" class="frm-field required sect1">
+																  		@for($i = 1 ; $i <= 7;$i++)
+																		<option value="{{$i}}" style="font-size: 20px">{{$i}}</option>
+																		@endfor
+																  </select>
+															
+
+															<div class="clearfix"> </div>
+														</div>
+													</div>
+											
+												<div class="clearfix" style="clear: both;"> </div>
+								</div><!--  ===================================== ROW -->
+					
+												<div class="reservation" style="margin-top: 10px;">
 													
-														 <div class="section_room">
-															  <select id="1 Traveller" name="penumpang" onchange="change_country(this.value)" class="frm-field required sect1">
-															  		@for($i = 1 ; $i <= 7;$i++)
-																	<option value="{{$i}}">{{$i}}</option>
-																	@endfor
-															  </select>
-														 </div>	
-													</li>
-													<li class="span1_of_1 adult">
-															 <h5>Children (0-17)</h5>
-															 <!----------start section_room----------->
-															 <div class="section_room">
-																  <select id="country" onchange="change_country(this.value)" class="frm-field required">
-																		<option value="null">1</option>
-																		<option value="null">2</option>         
-																		<option value="AX">3</option>
-																		<option value="AX">4</option>
-																		<option value="AX">5</option>
-																		<option value="AX">6</option>
-																  </select>
-															 </div>	
-														</li>
-														<li class="span1_of_1 adult">
-															 <h5>Class</h5>
-															 <!----------start section_room----------->
-															 <div class="section_room">
-																  <select id="country" onchange="change_country(this.value)" class="frm-field required">
-																		<option value="null">Economy</option>
-																		<option value="null">Business</option>     
-																  </select>
-															 </div>	
-														</li>
-													<div class="clearfix"> </div>
-												</ul>
-											</div>
-											<div class="reservation">
-												<ul>	
-													 <li class="span1_of_3">
 															<div class="date_btn">
 																
 																	<input type="submit" name="search" value="Search Flights" />
 																
 															</div>
-													 </li>
+													
 													 <div class="clearfix"></div>
-												</ul>
-											</div>
+													
+												</div>
+											
 										</div>
+						
 									</form>
 									</div>
 								</div>

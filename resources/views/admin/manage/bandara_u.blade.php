@@ -18,7 +18,7 @@
 		        		<i class="glyphicon glyphicon-qrcode form-control-feedback"></i>
 					</div>
 					<div class="form-group  has-feedback">
-		        		<input type="text" value="{{old('iso')}}" class="form-control" required name="iso" placeholder="Nama iso. ex CGK">
+		        		<input type="text" value="{{$bandara->iso}}" class="form-control" required name="iso" placeholder="Nama iso. ex CGK">
 		        		<i class="glyphicon glyphicon glyphicon-map-marker form-control-feedback"></i>
 					</div>
 
@@ -26,7 +26,7 @@
 		        		<select name="kota" id="">
 							@foreach($kotas as $kota)
 
-								<option value="{{$kota->id}}" {{old('kota') == $bandara->kota_id ? 'selected' : ''}} > {{$kota->nama}}</option>		
+								<option value="{{$kota->id}}" {{ $bandara->kota_id == $kota->id ? 'selected' : ''}} > {{$kota->nama}}</option>		
 							@endforeach
 						</select>
 					</div>

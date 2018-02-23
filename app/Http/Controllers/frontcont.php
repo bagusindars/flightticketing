@@ -89,9 +89,10 @@ class frontcont extends Controller
 
 
     public function inputcustomer(Request $request,$id){
-    	Session::put('reservasi', 1);
+    	
 
     	$penumpang = $request->penumpang;
+       
     	if(Auth::guest()){
 	    	$pemesan = Pemesan::create([
 	    		'nama' => $request->namapemesan,
@@ -99,7 +100,7 @@ class frontcont extends Controller
 	    		'gender' => $request->genderpemesan,
 	    		'alamat' => $request->alamatpemesan,
 	    		'phone' => $request->phonepemesan,
-	    		'token' => $request->_token,
+	    		'token' => $request->token,
 	    		'kode' => $request->kode,
 	    		'rute_id' => $id,
 	    	]);
@@ -111,25 +112,30 @@ class frontcont extends Controller
 	    		'gender' => Auth::user()->gender,
 	    		'alamat' => Auth::user()->alamat,
 	    		'phone' => Auth::user()->phone,
-	    		'token' => $request->_token,
+	    		'token' => $request->token,
 	    		'kode' => $request->kodepemesanuser,
 	    		'rute_id' => $id,
 	    	]);
 	    }
+
 	    if(Auth::guest())
-	    	$orang = Pemesan::where('token'	,$request->_token)->where('email',$request->emailpemesan)->first();
-	    else
-	    	$orang = Pemesan::where('token'	,$request->_token)->where('email',Auth::user()->email)->first();
+	    	$orang = Pemesan::where('token'	,$request->token)->where('email',$request->emailpemesan)->first();
+	    else{
+	    	$orang = Pemesan::where('token'	,$request->token)->where('email',Auth::user()->email)->first();
+        }
+       
+        
     	for ($i=1; $i <= $request->penumpang ; $i++) { 
+
     		Customer::create([
     			'nama' => $request->namacustomer[$i],
     			'pemesan_id' => $orang->id,
-    			'token' => $request->_token,
+    			'token' => $request->token,
     			'gender' => $request->gendercustomer[$i],
                 'rute_id' => $orang->rute_id,
     		]);
     	}
-
+       
     	return redirect('/pemesanan/'.$orang->rute_id.'/detailstp2?rute='.$orang->rute_id);
     }
 
@@ -140,9 +146,7 @@ class frontcont extends Controller
     	$allcus = Customer::where('rute_id',$id)->get();
 
 
-    	//  if(!Session::has('reservasi') || Session::get('reservasi') != 1 || empty($request)) {
-    	// 	return redirect('/jadwal');
-    	// }else
+    	
     		$penumpang = $request->penumpang;
     		$rute = Rute::whereDate('depart_at','>=' , DB::raw('CURDATE()'))->findOrFail($id);
 	    	if($penumpang > 7){
@@ -161,55 +165,53 @@ class frontcont extends Controller
 		    		return view('ui.pemesananreg2',compact('rute','pemesan','customer','pesan','allcus'));
 		    	}else
 	    			return view('ui.pemesananreg2',compact('rute'));
-
+        
     }
    
 
    public function pilihkursi(Request $request,$id){
-   		$pemesan = Pemesan::where('email',$request->emailpemesan)->where('kode',$request->kodepemesan)->first();
-   		$kursi = $request->seat;
-   		$customer = Customer::where('token',$pemesan->token)->where('pemesan_id',$pemesan->id)->get();
-   		$count = 0;
-        if($customer->kursi = null){
-            $rute->update([
-                'kursi' => $rute->kursi - count($customer->where('kursi','!=',null)),
-            ]);
-        }
-   		foreach ($customer as $cus) {
-   			$cus->update([
-   				'kursi' => $kursi[$count],
-   			]);
-   			$count++;
-   		}
+      
+       		$pemesan = Pemesan::where('email',$request->emailpemesan)->whereDate('created_at','=' , DB::raw('CURDATE()'))->where('kode',$request->kodepemesan)->first();
+       		$kursi = $request->seat;
+       		$customer = Customer::where('token',$pemesan->token)->where('pemesan_id',$pemesan->id)->get();
+       		$count = 0 ;
+            $rute = Rute::where('id',$id)->first();
+            foreach ($customer as $cus) {
+                
+                $cus->update([
+                    'kursi' => $kursi[$count],
+                ]);
+                $count++;
+            }
+           
 
-        $rute = Rute::where('id',$id)->first();
-
-
-        Session::put('reservasi', 2);
-   		return redirect('/pemesanan/'.$id.'/detailstp3?emailpemesan='.$pemesan->email.'&kodepemesan='.$pemesan->kode);
+            Session::put('reservasi', 2);
+       		return redirect('/pemesanan/'.$id.'/detailstp3?emailpemesan='.$pemesan->email.'&kodepemesan='.$pemesan->kode);
+        
    }
 
 
    public function konfirmasi(Request $request,$id){
-        // if(!Session::has('reservasi') || Session::get('reservasi') != 2 || empty($request)) {
-        //     return redirect('/jadwal');
-        // }else{
-
+       
             $pemesan = Pemesan::where('email',$request->emailpemesan)->where('kode',$request->kodepemesan)->where('rute_id',$id)->first();
 
             $customer = Customer::where('token',$pemesan->token)->where('pemesan_id',$pemesan->id)->get();
             $allcus = Customer::where('rute_id',$id)->get();
             $rute = Rute::whereDate('depart_at','>=' , DB::raw('CURDATE()'))->whereRaw('kursi - '.count($customer).' > 0')->find($id);
+            Session::put('reservasi', 3);
             return view('ui.pemesananreg3',compact('pemesan','customer','rute','allcus'));
-        // }
+        
 
    }
 
    public function pembayaran(Request $request, $id){
-        $pemesan = Pemesan::where('email',$request->emailpemesan)->where('kode',$request->kodepemesan)->where('rute_id',$id)->first();
-        $customer = Customer::where('token',$pemesan->token)->where('pemesan_id',$pemesan->id)->get();
-        $rute = Rute::whereDate('depart_at','>=' , DB::raw('CURDATE()'))->whereRaw('kursi - '.count($customer).' > 0')->find($id);
-        return view('ui.pembayaran',compact('pemesan','customer','rute'));
+       
+
+            $pemesan = Pemesan::where('email',$request->emailpemesan)->where('kode',$request->kodepemesan)->where('rute_id',$id)->first();
+            $customer = Customer::where('token',$pemesan->token)->where('pemesan_id',$pemesan->id)->get();
+            $rute = Rute::whereDate('depart_at','>=' , DB::raw('CURDATE()'))->whereRaw('kursi - '.count($customer).' > 0')->find($id);
+            return view('ui.pembayaran',compact('pemesan','customer','rute'));
+        
    }
 
 
@@ -226,35 +228,40 @@ class frontcont extends Controller
         'rute_id' => $id,
         'price' => ($rute->harga*count($customer)),
         'bank' => $request->bank
-
      ]);
+
      return redirect('/konfirmasi')->with('berhasil','Pemesanan tiket berhasil. Silahkan konfirmasi pembayaran');
 
    }
 
 
    public function konfirmasipembayaran(Request $request){
-        if(empty($request))
-            return redirect('/konfirmasi');
-        else
-            $email = $request->email;
-            $kode = $request->kode;
+
+        $email = $request->email;
+        $kode = $request->kode;
+
+        if( $email == null || $kode == null)
+           return view('ui.konfirmasi');
+        elseif($request != null){
+            
             $pemesan = Pemesan::where('email',$email)->get();
             $orang = array();
-
+           
             foreach ($pemesan as $pes) {
                 $orang[] = $pes->id;
             }
-
-
+            
             $reservasi = Reservasi::where('kode',$kode)->whereHas('pemesans',function($query) use ($email){
                 $query->where('email',$email);
             })->first();
             
+            
             if($reservasi == null){
                 $pesan = 'Tidak terdaftar';
             }
-        return view('ui.konfirmasi',compact('reservasi','pesan'));
+             return view('ui.konfirmasi',compact('reservasi','pesan'));
+        }
+       
    }
 
    public function inputtransaksi(Request $request){
